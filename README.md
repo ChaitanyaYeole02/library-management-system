@@ -6,17 +6,18 @@
 <h3>◦ Developed with the software and tools listed below.</h3>
 
 <p align="center">
-<img src="https://img.shields.io/badge/SVG-FFB13B.svg?style&logo=SVG&logoColor=black" alt="SVG" />
+<img src="https://img.shields.io/badge/Python-3776AB.svg?style&logo=Python&logoColor=white" alt="Python" />
+<img src="https://img.shields.io/badge/React-61DAFB.svg?style&logo=React&logoColor=black" alt="React" />
 <img src="https://img.shields.io/badge/JavaScript-F7DF1E.svg?style&logo=JavaScript&logoColor=black" alt="JavaScript" />
 <img src="https://img.shields.io/badge/HTML5-E34F26.svg?style&logo=HTML5&logoColor=white" alt="HTML5" />
+<img src="https://img.shields.io/badge/CSS-1572B6?style=flat&logo=css3" alt="CSS Badge" />
+<img src="https://img.shields.io/badge/MySQL-00758F?style=flat&logo=mysql&logoColor=white" alt="MySQL" />
+
+<img src="https://img.shields.io/badge/FastAPI-009688.svg?style&logo=FastAPI&logoColor=white" alt="FastAPI" />
 <img src="https://img.shields.io/badge/Vite-646CFF.svg?style&logo=Vite&logoColor=white" alt="Vite" />
-<img src="https://img.shields.io/badge/React-61DAFB.svg?style&logo=React&logoColor=black" alt="React" />
 <img src="https://img.shields.io/badge/Axios-5A29E4.svg?style&logo=Axios&logoColor=white" alt="Axios" />
 
-<img src="https://img.shields.io/badge/Python-3776AB.svg?style&logo=Python&logoColor=white" alt="Python" />
-<img src="https://img.shields.io/badge/FastAPI-009688.svg?style&logo=FastAPI&logoColor=white" alt="FastAPI" />
 <img src="https://img.shields.io/badge/Docker-2496ED.svg?style&logo=Docker&logoColor=white" alt="Docker" />
-<img src="https://img.shields.io/badge/Markdown-000000.svg?style&logo=Markdown&logoColor=white" alt="Markdown" />
 </p>
 <img src="https://img.shields.io/github/languages/code-size/chaitanya-yeole/library-management-system" alt="GitHub code size in bytes" />
 <img src="https://img.shields.io/github/license/chaitanya-yeole/library-management-system" alt="GitHub license" />
@@ -26,7 +27,6 @@
 ## 📍 Overview
 
 The Library Management System project aims to provide a web-based application for managing books in a library. The core functionalities include adding books to a database, viewing and searching for books based on various filters, marking books as inactive, and checking the availability of books. This system enables librarians to efficiently manage their book collection, track availability, and facilitate borrowing processes, ultimately enhancing the overall organization and productivity of the library operations.
-
 
 ---
 
@@ -64,10 +64,18 @@ docker-compose up
 
 ---
 
-
 ## 📄 License
 
 [MIT](./LICENSE)
+
+---
+
+## 👏 Acknowledgments
+
+*Badges*
+  - [Shields.io](https://shields.io/)
+  - [Aveek-Saha/GitHub-Profile-Badges](https://github.com/Aveek-Saha/GitHub-Profile-Badges)
+  - [Ileriayo/Markdown-Badges](https://github.com/Ileriayo/markdown-badges)
 
 <p align="right">
   <a href="#top"><b>🔝 Return </b></a>
