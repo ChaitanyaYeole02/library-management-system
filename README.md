@@ -57,7 +57,7 @@ cd library-management-system
 docker-compose build
 ```
 
-4. Run the Application
+4. Run the docker image:
 ```sh
 docker-compose up
 ```
