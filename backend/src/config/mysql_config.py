@@ -2,7 +2,7 @@ import mysql.connector as conn
 
 from contextlib import contextmanager
 
-host_val = "127.0.0.1"
+host_val = "mysql"
 user_val = "root"
 pass_val = "yeole"
 db_val = "library_management_dev"
