@@ -1,0 +1,1374 @@
+[2023-09-07 17:57:29,299] - [INFO] - [apis.py] - [add_book()] {'test': 'test'}
+[2023-09-07 17:58:11,726] - [INFO] - [apis.py] - [add_book()] {'title': 'test-title', 'author': 'test-author'}
+[2023-09-07 17:59:06,305] - [INFO] - [apis.py] - [add_book()] {'title': 'test-title', 'author': 'test-author'}
+[2023-09-07 18:22:03,763] - [ERROR] - [apis.py] - [add_book()] 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''books'' at line 1
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''books'' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 13, in add_book
+    data = mysql_db.fetch_all("SELECT * FROM 'books'")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 35, in fetch_all
+    self.cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''books'' at line 1
+[2023-09-07 19:18:32,995] - [ERROR] - [apis.py] - [insert_book()] 'availability_date'
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 15, in insert_book
+    add_book(body)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 4, in add_book
+    f"{body['availability_date']}, {body['borrowed_date']}, {body['is_active']})")
+       ~~~~^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'availability_date'
+[2023-09-07 19:39:28,991] - [ERROR] - [apis.py] - [insert_book()] 'is_active'
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 15, in insert_book
+    if not check_post_body(body):
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 2, in check_post_body
+    if not (body['title'] and body['author'] and body['publication_date'] and body['is_active']):
+                                                                              ~~~~^^^^^^^^^^^^^
+KeyError: 'is_active'
+[2023-09-07 19:41:48,828] - [ERROR] - [apis.py] - [insert_book()] 'availability_date'
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 18, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 7, in add_book
+    params = (body['title'], body['author'], body['publication_date'], body['availability_date'], body['borrowed_date'],
+                                                                       ~~~~^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'availability_date'
+[2023-09-07 19:42:00,545] - [ERROR] - [apis.py] - [insert_book()] 'availability_date'
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 18, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 7, in add_book
+    params = (body['title'], body['author'], body['publication_date'], body['availability_date'], body['borrowed_date'],
+                                                                       ~~~~^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'availability_date'
+[2023-09-07 19:49:47,901] - [ERROR] - [apis.py] - [insert_book()] 2055: Cursor is not connected
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 300, in execute
+    raise ProgrammingError
+mysql.connector.errors.ProgrammingError: Unknown error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 18, in insert_book
+    print(check_duplicate_book(body['title'], body['author']))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 14, in check_duplicate_book
+    return mysql_db.is_exists(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 28, in is_exists
+    self.cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 302, in execute
+    raise ProgrammingError("Cursor is not connected", 2055) from err
+mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
+[2023-09-07 19:50:11,480] - [ERROR] - [apis.py] - [insert_book()] 2055: Cursor is not connected
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 300, in execute
+    raise ProgrammingError
+mysql.connector.errors.ProgrammingError: Unknown error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 18, in insert_book
+    print(check_duplicate_book(body['title'], body['author']))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 14, in check_duplicate_book
+    return mysql_db.is_exists(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 28, in is_exists
+    self.cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 302, in execute
+    raise ProgrammingError("Cursor is not connected", 2055) from err
+mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
+[2023-09-07 19:51:45,078] - [ERROR] - [apis.py] - [insert_book()] 2055: Cursor is not connected
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 300, in execute
+    raise ProgrammingError
+mysql.connector.errors.ProgrammingError: Unknown error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 18, in insert_book
+    print(check_duplicate_book(body['title'], body['author']))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 14, in check_duplicate_book
+    return mysql_db.is_exists(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 28, in is_exists
+    self.cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 302, in execute
+    raise ProgrammingError("Cursor is not connected", 2055) from err
+mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
+[2023-09-07 19:57:43,038] - [ERROR] - [apis.py] - [insert_book()] 2055: Cursor is not connected
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 300, in execute
+    raise ProgrammingError
+mysql.connector.errors.ProgrammingError: Unknown error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 18, in insert_book
+    print(check_duplicate_book(body['title'], body['author']))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 15, in check_duplicate_book
+    return mysql_db.is_exists(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 28, in is_exists
+    self.cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 302, in execute
+    raise ProgrammingError("Cursor is not connected", 2055) from err
+mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
+[2023-09-07 19:59:07,296] - [ERROR] - [apis.py] - [insert_book()] 2055: Cursor is not connected
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 300, in execute
+    raise ProgrammingError
+mysql.connector.errors.ProgrammingError: Unknown error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 18, in insert_book
+    print(check_duplicate_book(body['title'], body['author']))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 15, in check_duplicate_book
+    return mysql_db.is_exists(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 28, in is_exists
+    self.cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 302, in execute
+    raise ProgrammingError("Cursor is not connected", 2055) from err
+mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
+[2023-09-07 19:59:58,525] - [ERROR] - [apis.py] - [insert_book()] 2055: Cursor is not connected
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 300, in execute
+    raise ProgrammingError
+mysql.connector.errors.ProgrammingError: Unknown error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 18, in insert_book
+    print(check_duplicate_book(body['title'], body['author']))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 15, in check_duplicate_book
+    return mysql_db.is_exists(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 28, in is_exists
+    self.cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 302, in execute
+    raise ProgrammingError("Cursor is not connected", 2055) from err
+mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
+[2023-09-07 19:59:59,393] - [ERROR] - [apis.py] - [insert_book()] 2055: Cursor is not connected
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 300, in execute
+    raise ProgrammingError
+mysql.connector.errors.ProgrammingError: Unknown error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 18, in insert_book
+    print(check_duplicate_book(body['title'], body['author']))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 15, in check_duplicate_book
+    return mysql_db.is_exists(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 28, in is_exists
+    self.cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 302, in execute
+    raise ProgrammingError("Cursor is not connected", 2055) from err
+mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
+[2023-09-07 20:00:51,840] - [ERROR] - [apis.py] - [insert_book()] 2055: Cursor is not connected
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 300, in execute
+    raise ProgrammingError
+mysql.connector.errors.ProgrammingError: Unknown error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 18, in insert_book
+    print(check_duplicate_book(body['title'], body['author']))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 15, in check_duplicate_book
+    return mysql_db.is_exists(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 28, in is_exists
+    self.cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 302, in execute
+    raise ProgrammingError("Cursor is not connected", 2055) from err
+mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
+[2023-09-07 20:00:52,523] - [ERROR] - [apis.py] - [insert_book()] 2055: Cursor is not connected
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 300, in execute
+    raise ProgrammingError
+mysql.connector.errors.ProgrammingError: Unknown error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 18, in insert_book
+    print(check_duplicate_book(body['title'], body['author']))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 15, in check_duplicate_book
+    return mysql_db.is_exists(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 28, in is_exists
+    self.cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 302, in execute
+    raise ProgrammingError("Cursor is not connected", 2055) from err
+mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
+[2023-09-07 20:01:06,984] - [ERROR] - [apis.py] - [insert_book()] 2055: Cursor is not connected
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 300, in execute
+    raise ProgrammingError
+mysql.connector.errors.ProgrammingError: Unknown error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 18, in insert_book
+    print(check_duplicate_book(body['title'], body['author']))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 15, in check_duplicate_book
+    return mysql_db.is_exists(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 28, in is_exists
+    self.cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 302, in execute
+    raise ProgrammingError("Cursor is not connected", 2055) from err
+mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
+[2023-09-07 20:03:20,698] - [ERROR] - [apis.py] - [insert_book()] 2055: Cursor is not connected
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 300, in execute
+    raise ProgrammingError
+mysql.connector.errors.ProgrammingError: Unknown error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 18, in insert_book
+    print(check_duplicate_book(body['title'], body['author']))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 15, in check_duplicate_book
+    return mysql_db.is_exists(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 28, in is_exists
+    self.cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 302, in execute
+    raise ProgrammingError("Cursor is not connected", 2055) from err
+mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
+[2023-09-07 20:03:21,620] - [ERROR] - [apis.py] - [insert_book()] 2055: Cursor is not connected
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 300, in execute
+    raise ProgrammingError
+mysql.connector.errors.ProgrammingError: Unknown error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 18, in insert_book
+    print(check_duplicate_book(body['title'], body['author']))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 15, in check_duplicate_book
+    return mysql_db.is_exists(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 28, in is_exists
+    self.cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 302, in execute
+    raise ProgrammingError("Cursor is not connected", 2055) from err
+mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
+[2023-09-07 20:04:56,738] - [ERROR] - [apis.py] - [insert_book()] 2055: Cursor is not connected
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 300, in execute
+    raise ProgrammingError
+mysql.connector.errors.ProgrammingError: Unknown error
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 21, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 10, in add_book
+    return mysql_db.insert(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 35, in insert
+    self.cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 302, in execute
+    raise ProgrammingError("Cursor is not connected", 2055) from err
+mysql.connector.errors.ProgrammingError: 2055: Cursor is not connected
+[2023-09-07 20:08:38,850] - [ERROR] - [apis.py] - [insert_book()] MySQL Connection not available.
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 21, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 10, in add_book
+    return mysql_db.insert(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 35, in insert
+    self.cursor = self.connection.cursor()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 700, in cursor
+    raise OperationalError("MySQL Connection not available.")
+mysql.connector.errors.OperationalError: MySQL Connection not available.
+[2023-09-07 20:09:18,216] - [ERROR] - [apis.py] - [insert_book()] MySQL Connection not available.
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 21, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 10, in add_book
+    return mysql_db.insert(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 34, in insert
+    self.cursor = self.connection.cursor()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 700, in cursor
+    raise OperationalError("MySQL Connection not available.")
+mysql.connector.errors.OperationalError: MySQL Connection not available.
+[2023-09-07 20:14:58,652] - [ERROR] - [apis.py] - [insert_book()] 'generator' object does not support the context manager protocol
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 21, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 10, in add_book
+    return mysql_db.insert(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 42, in insert
+    with self.mysql_connection as connection:
+TypeError: 'generator' object does not support the context manager protocol
+[2023-09-07 20:14:59,240] - [ERROR] - [apis.py] - [insert_book()] 'generator' object does not support the context manager protocol
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 21, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 10, in add_book
+    return mysql_db.insert(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 42, in insert
+    with self.mysql_connection as connection:
+TypeError: 'generator' object does not support the context manager protocol
+[2023-09-07 20:15:20,488] - [ERROR] - [apis.py] - [insert_book()] 
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 21, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 10, in add_book
+    return mysql_db.insert(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 42, in insert
+    with next(self.mysql_connection) as connection:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration
+[2023-09-07 20:18:10,454] - [ERROR] - [apis.py] - [insert_book()] 'generator' object does not support the context manager protocol
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 21, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 10, in add_book
+    return mysql_db.insert(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 42, in insert
+    with get_mysql_connection() as connection:
+TypeError: 'generator' object does not support the context manager protocol
+[2023-09-07 20:18:11,050] - [ERROR] - [apis.py] - [insert_book()] 'generator' object does not support the context manager protocol
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 21, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 10, in add_book
+    return mysql_db.insert(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 42, in insert
+    with get_mysql_connection() as connection:
+TypeError: 'generator' object does not support the context manager protocol
+[2023-09-07 21:10:48,431] - [ERROR] - [apis.py] - [delete_book()] Could not process parameters: int(13), it must be of type list, tuple or dict
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 33, in delete_book
+    mark_book_inactive(book_id)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\delete.py", line 8, in mark_book_inactive
+    return mysql_db.insert(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 48, in insert
+    cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 317, in execute
+    prepared = self._cnx.prepare_for_mysql(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 816, in prepare_for_mysql
+    raise ProgrammingError(
+mysql.connector.errors.ProgrammingError: Could not process parameters: int(13), it must be of type list, tuple or dict
+[2023-09-07 21:11:09,906] - [ERROR] - [apis.py] - [delete_book()] Could not process parameters: int(13), it must be of type list, tuple or dict
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 33, in delete_book
+    mark_book_inactive(book_id)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\delete.py", line 8, in mark_book_inactive
+    return mysql_db.insert(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 48, in insert
+    cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 317, in execute
+    prepared = self._cnx.prepare_for_mysql(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 816, in prepare_for_mysql
+    raise ProgrammingError(
+mysql.connector.errors.ProgrammingError: Could not process parameters: int(13), it must be of type list, tuple or dict
+[2023-09-07 21:11:22,207] - [ERROR] - [apis.py] - [delete_book()] 'int' object is not iterable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 33, in delete_book
+    mark_book_inactive(book_id)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\delete.py", line 6, in mark_book_inactive
+    params = tuple(book_id)
+             ^^^^^^^^^^^^^^
+TypeError: 'int' object is not iterable
+[2023-09-07 21:11:55,178] - [ERROR] - [apis.py] - [delete_book()] Could not process parameters: int(13), it must be of type list, tuple or dict
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 33, in delete_book
+    mark_book_inactive(book_id)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\delete.py", line 8, in mark_book_inactive
+    mysql_db.update(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 56, in update
+    cursor = cursor.execute(query, params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 317, in execute
+    prepared = self._cnx.prepare_for_mysql(params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 816, in prepare_for_mysql
+    raise ProgrammingError(
+mysql.connector.errors.ProgrammingError: Could not process parameters: int(13), it must be of type list, tuple or dict
+[2023-09-07 21:12:03,501] - [ERROR] - [apis.py] - [delete_book()] 'int' object is not iterable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 33, in delete_book
+    mark_book_inactive(book_id)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\delete.py", line 6, in mark_book_inactive
+    params = tuple(book_id)
+             ^^^^^^^^^^^^^^
+TypeError: 'int' object is not iterable
+[2023-09-07 21:12:12,587] - [ERROR] - [apis.py] - [delete_book()] 'int' object is not iterable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 33, in delete_book
+    mark_book_inactive(book_id)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\delete.py", line 7, in mark_book_inactive
+    params = tuple(book_id)
+             ^^^^^^^^^^^^^^
+TypeError: 'int' object is not iterable
+[2023-09-07 21:12:21,018] - [ERROR] - [apis.py] - [delete_book()] 'int' object is not iterable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 33, in delete_book
+    mark_book_inactive(book_id)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\delete.py", line 6, in mark_book_inactive
+    params = tuple(book_id,)
+             ^^^^^^^^^^^^^^^
+TypeError: 'int' object is not iterable
+[2023-09-07 21:13:14,196] - [ERROR] - [apis.py] - [delete_book()] 1054 (42S22): Unknown column 'is_acitve' in 'field list'
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Unknown column 'is_acitve' in 'field list'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 33, in delete_book
+    mark_book_inactive(book_id)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\delete.py", line 8, in mark_book_inactive
+    mysql_db.update(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 56, in update
+    cursor = cursor.execute(query, params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'is_acitve' in 'field list'
+[2023-09-07 21:20:36,057] - [ERROR] - [apis.py] - [get_books()] 'list' object has no attribute '__dict__'
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 47, in get_books
+    print(book_data.__dict__)
+          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute '__dict__'
+[2023-09-07 21:23:18,931] - [ERROR] - [apis.py] - [get_books()] Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 46, in get_books
+    return JSONResponse(status_code=200, content=fetch_books())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 196, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 55, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 199, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+[2023-09-07 21:23:30,527] - [ERROR] - [apis.py] - [get_books()] Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 47, in get_books
+    return JSONResponse(status_code=200, content=book_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 196, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 55, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 199, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+[2023-09-07 21:23:38,010] - [ERROR] - [apis.py] - [get_books()] Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    return JSONResponse(status_code=200, content=book_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 196, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 55, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 199, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+[2023-09-07 21:26:27,754] - [ERROR] - [apis.py] - [get_books()] Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    return JSONResponse(status_code=200, content=book_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 196, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 55, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 199, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+[2023-09-07 21:26:55,652] - [ERROR] - [apis.py] - [get_books()] Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    return JSONResponse(status_code=200, content=book_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 196, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 55, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 199, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+[2023-09-07 21:27:10,391] - [ERROR] - [apis.py] - [get_books()] Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    return JSONResponse(status_code=200, content=book_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 196, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 55, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 199, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+[2023-09-07 21:27:32,641] - [ERROR] - [apis.py] - [insert_book()] 1292 (22007): Incorrect datetime value: '2023-06-30T10:00:00Z' for column 'publication_date' at row 1
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Incorrect datetime value: '2023-06-30T10:00:00Z' for column 'publication_date' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 21, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 10, in add_book
+    return mysql_db.insert(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 55, in insert
+    cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DataError: 1292 (22007): Incorrect datetime value: '2023-06-30T10:00:00Z' for column 'publication_date' at row 1
+[2023-09-07 21:31:10,197] - [ERROR] - [apis.py] - [get_books()] Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    return JSONResponse(status_code=200, content=book_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 196, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 55, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 199, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+[2023-09-07 21:31:49,280] - [ERROR] - [apis.py] - [get_books()] list indices must be integers or slices, not str
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    return JSONResponse(status_code=200, content=book_data['publication_date'])
+                                                 ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+[2023-09-07 21:32:08,975] - [ERROR] - [apis.py] - [get_books()] list indices must be integers or slices, not str
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    return JSONResponse(status_code=200, content={'pub': book_data['publication_date']})
+                                                         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+[2023-09-07 21:32:50,834] - [ERROR] - [apis.py] - [get_books()] Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 49, in get_books
+    return JSONResponse(status_code=200, content={'pub': book_data[0]['publication_date']})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 196, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 55, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 199, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+[2023-09-07 21:34:41,638] - [ERROR] - [apis.py] - [get_books()] tuple indices must be integers or slices, not str
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 47, in get_books
+    return JSONResponse(status_code=200, content={'pub': book_data[0]['publication_date']})
+                                                         ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+TypeError: tuple indices must be integers or slices, not str
+[2023-09-07 21:34:51,926] - [ERROR] - [apis.py] - [get_books()] tuple indices must be integers or slices, not str
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    return JSONResponse(status_code=200, content={'pub': book_data[0]['publication_date']})
+                                                         ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+TypeError: tuple indices must be integers or slices, not str
+[2023-09-07 21:35:05,752] - [ERROR] - [apis.py] - [get_books()] Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    return JSONResponse(status_code=200, content=book_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 196, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 55, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 199, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+[2023-09-07 21:41:57,138] - [ERROR] - [apis.py] - [get_books()] Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    return JSONResponse(status_code=200, content=book_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 196, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 55, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 199, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+[2023-09-07 21:42:08,629] - [ERROR] - [apis.py] - [get_books()] Object of type datetime is not JSON serializable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    return JSONResponse(status_code=200, content=book_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 196, in __init__
+    super().__init__(content, status_code, headers, media_type, background)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 55, in __init__
+    self.body = self.render(content)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\starlette\responses.py", line 199, in render
+    return json.dumps(
+           ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type datetime is not JSON serializable
+[2023-09-07 21:42:41,365] - [ERROR] - [apis.py] - [get_books()] list indices must be integers or slices, not str
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 46, in get_books
+    book_data = fetch_book_data()
+                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 26, in fetch_book_data
+    del book_data['updated_at']
+        ~~~~~~~~~^^^^^^^^^^^^^^
+TypeError: list indices must be integers or slices, not str
+[2023-09-07 22:29:26,279] - [ERROR] - [apis.py] - [get_books()] 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE ''test-title-1''' at line 1
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE ''test-title-1''' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    book_data = fetch_book_data(title)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 29, in fetch_book_data
+    return mysql_db.fetch_all_dictionary(query, params_list if params_list else None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 41, in fetch_all_dictionary
+    cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE ''test-title-1''' at line 1
+[2023-09-07 22:30:13,850] - [ERROR] - [apis.py] - [get_books()] 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE ''test-title-1''' at line 1
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE ''test-title-1''' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    book_data = fetch_book_data(title)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 30, in fetch_book_data
+    return mysql_db.fetch_all_dictionary(query, params_list if params_list else None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 41, in fetch_all_dictionary
+    cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE ''test-title-1''' at line 1
+[2023-09-07 22:30:27,846] - [ERROR] - [apis.py] - [get_books()] 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE ''test-title-1''' at line 1
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE ''test-title-1''' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    book_data = fetch_book_data(title)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 30, in fetch_book_data
+    return mysql_db.fetch_all_dictionary(query, params_list if params_list else None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 41, in fetch_all_dictionary
+    cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE ''test-title-1''' at line 1
+[2023-09-07 22:30:39,836] - [ERROR] - [apis.py] - [get_books()] 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE ''test-title-1''' at line 1
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE ''test-title-1''' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    book_data = fetch_book_data(title)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 29, in fetch_book_data
+    return mysql_db.fetch_all_dictionary(query, tuple(params_list) if params_list else None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 41, in fetch_all_dictionary
+    cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE ''test-title-1''' at line 1
+[2023-09-07 22:30:58,856] - [ERROR] - [apis.py] - [get_books()] 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE ''test-title-1''' at line 1
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE ''test-title-1''' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    book_data = fetch_book_data(title)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 29, in fetch_book_data
+    return mysql_db.fetch_all_dictionary(query, tuple(params_list) if params_list else None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 42, in fetch_all_dictionary
+    cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE ''test-title-1''' at line 1
+[2023-09-07 22:31:16,784] - [ERROR] - [apis.py] - [get_books()] 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE 'test-title-1'' at line 1
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE 'test-title-1'' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    book_data = fetch_book_data(title)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 29, in fetch_book_data
+    return mysql_db.fetch_all_dictionary(query, tuple(params_list) if params_list else None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 42, in fetch_all_dictionary
+    cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE 'test-title-1'' at line 1
+[2023-09-07 22:31:39,182] - [ERROR] - [apis.py] - [get_books()] 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE '%'test-title-1'%%' at line 1
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE '%'test-title-1'%%' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    book_data = fetch_book_data(title)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 29, in fetch_book_data
+    return mysql_db.fetch_all_dictionary(query, tuple(params_list) if params_list else None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 42, in fetch_all_dictionary
+    cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE '%'test-title-1'%%' at line 1
+[2023-09-07 22:33:05,338] - [ERROR] - [apis.py] - [get_books()] 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE '%test-title-1%'' at line 1
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE '%test-title-1%'' at line 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    book_data = fetch_book_data(title)
+                ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 29, in fetch_book_data
+    return mysql_db.fetch_all_dictionary(query, tuple(params_list))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 42, in fetch_all_dictionary
+    cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND title LIKE '%test-title-1%'' at line 1
+[2023-09-07 22:47:03,105] - [ERROR] - [apis.py] - [get_books()] 'BookFilters' object is not subscriptable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 47, in get_books
+    book_data = fetch_book_data(book_filters)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 26, in fetch_book_data
+    if book_filters['title']:
+       ~~~~~~~~~~~~^^^^^^^^^
+TypeError: 'BookFilters' object is not subscriptable
+[2023-09-07 22:47:14,515] - [ERROR] - [apis.py] - [get_books()] 'BookFilters' object is not subscriptable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 47, in get_books
+    book_data = fetch_book_data(book_filters)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 27, in fetch_book_data
+    if book_filters['title']:
+       ~~~~~~~~~~~~^^^^^^^^^
+TypeError: 'BookFilters' object is not subscriptable
+[2023-09-07 22:47:26,372] - [ERROR] - [apis.py] - [get_books()] 'BookFilters' object is not subscriptable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 47, in get_books
+    book_data = fetch_book_data(book_filters)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 27, in fetch_book_data
+    if book_filters['title']:
+       ~~~~~~~~~~~~^^^^^^^^^
+TypeError: 'BookFilters' object is not subscriptable
+[2023-09-07 22:47:50,538] - [ERROR] - [apis.py] - [get_books()] 'BookFilters' object is not subscriptable
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 47, in get_books
+    book_data = fetch_book_data(book_filters)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 29, in fetch_book_data
+    params.append(f"%{book_filters['title']}%")
+                      ~~~~~~~~~~~~^^^^^^^^^
+TypeError: 'BookFilters' object is not subscriptable
+[2023-09-08 19:03:19,004] - [ERROR] - [apis.py] - [insert_book()] 1406 (22001): Data too long for column 'publication_date' at row 1
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data too long for column 'publication_date' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 22, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 10, in add_book
+    return mysql_db.insert(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 55, in insert
+    cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DataError: 1406 (22001): Data too long for column 'publication_date' at row 1
+[2023-09-08 19:03:42,927] - [ERROR] - [apis.py] - [insert_book()] 1406 (22001): Data too long for column 'publication_date' at row 1
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data too long for column 'publication_date' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 23, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 10, in add_book
+    return mysql_db.insert(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 55, in insert
+    cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DataError: 1406 (22001): Data too long for column 'publication_date' at row 1
+[2023-09-08 19:04:54,882] - [ERROR] - [apis.py] - [insert_book()] 1406 (22001): Data too long for column 'publication_date' at row 1
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data too long for column 'publication_date' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 23, in insert_book
+    if row_id:
+             ^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 10, in add_book
+    return mysql_db.insert(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 55, in insert
+    cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DataError: 1406 (22001): Data too long for column 'publication_date' at row 1
+[2023-09-08 19:08:08,968] - [ERROR] - [apis.py] - [insert_book()] 'str' object has no attribute 'strftime'
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 22, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 5, in add_book
+    body['publication_date'] = body['publication_date'].strftime('%Y-%m-%d %H:%M:%S')
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'strftime'
+[2023-09-08 19:10:17,041] - [ERROR] - [apis.py] - [insert_book()] time data '2023-08-30T04:00:00.000Z' does not match format '%Y-%m-%d %H:%M:%S'
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 22, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 7, in add_book
+    body['publication_date'] = datetime.strptime(body['publication_date'], '%Y-%m-%d %H:%M:%S')
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 349, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data '2023-08-30T04:00:00.000Z' does not match format '%Y-%m-%d %H:%M:%S'
+[2023-09-08 19:10:43,025] - [ERROR] - [apis.py] - [insert_book()] time data '2023-08-30T04:00:00.000Z' does not match format '%Y-%m-%dT%H:%M:%S.Z'
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 22, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 7, in add_book
+    body['publication_date'] = datetime.strptime(body['publication_date'], '%Y-%m-%dT%H:%M:%S.Z')
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 349, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data '2023-08-30T04:00:00.000Z' does not match format '%Y-%m-%dT%H:%M:%S.Z'
+[2023-09-09 00:29:43,847] - [ERROR] - [apis.py] - [insert_book()] 1406 (22001): Data too long for column 'availability_date' at row 1
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Data too long for column 'availability_date' at row 1
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 22, in insert_book
+    row_id = add_book(body)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\create.py", line 14, in add_book
+    return mysql_db.insert(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\config\mysql_config.py", line 55, in insert
+    cursor.execute(query, params)
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.DataError: 1406 (22001): Data too long for column 'availability_date' at row 1
+[2023-09-09 02:02:46,004] - [ERROR] - [apis.py] - [get_books()] name 'calculate_availability' is not defined
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    book_data = calculate_availability(book_data)
+                ^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'calculate_availability' is not defined
+[2023-09-09 02:02:58,248] - [ERROR] - [apis.py] - [get_books()] name 'calculate_availability' is not defined
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    book_data = calculate_availability(book_data)
+                ^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'calculate_availability' is not defined
+[2023-09-09 02:04:10,726] - [ERROR] - [apis.py] - [get_books()] 'dict' object has no attribute 'availability_date'
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    book_data = calculate_availability(book_data)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\update.py", line 15, in calculate_availability
+    print(i.availability_date)
+          ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'availability_date'
+[2023-09-09 10:04:13,437] - [ERROR] - [apis.py] - [get_books()] time data 'Fri Sep 08 2023 00:00:00 GMT-0400 (Eastern Daylight Time)' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 48, in get_books
+    book_data = fetch_book_data(book_filters)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 39, in fetch_book_data
+    book_filters.publication_date = (datetime.strptime(book_filters.publication_date,
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 349, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data 'Fri Sep 08 2023 00:00:00 GMT-0400 (Eastern Daylight Time)' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
+[2023-09-09 11:01:08,022] - [ERROR] - [apis.py] - [get_books()] strptime() argument 1 must be str, not None
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 44, in fetch_book_data
+    book_filters.publication_date = (datetime.strptime(book_filters.publication_date,
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: strptime() argument 1 must be str, not None
+[2023-09-09 11:01:29,720] - [ERROR] - [apis.py] - [get_books()] time data 'Sat Sep 16 2023 00:00:00 GMT-0400 (Eastern Daylight Time)' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 44, in fetch_book_data
+    book_filters.availability_date = (datetime.strptime(book_filters.availability_date,
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 349, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data 'Sat Sep 16 2023 00:00:00 GMT-0400 (Eastern Daylight Time)' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
+[2023-09-09 11:21:55,826] - [ERROR] - [apis.py] - [get_books()] unconverted data remains: ?borrowing_time_range_end=2023-09-09T04:00:00.000Z
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 49, in fetch_book_data
+    book_filters.borrowing_time_range_start = (datetime.strptime(book_filters.borrowing_time_range_start,
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 352, in _strptime
+    raise ValueError("unconverted data remains: %s" %
+ValueError: unconverted data remains: ?borrowing_time_range_end=2023-09-09T04:00:00.000Z
+[2023-09-09 11:23:26,544] - [ERROR] - [apis.py] - [get_books()] unconverted data remains: ?borrowing_time_range_end=2023-09-09T04:00:00.000Z
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 50, in fetch_book_data
+    book_filters.borrowing_time_range_start = (datetime.strptime(
+                                               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 352, in _strptime
+    raise ValueError("unconverted data remains: %s" %
+ValueError: unconverted data remains: ?borrowing_time_range_end=2023-09-09T04:00:00.000Z
+[2023-09-09 11:23:40,854] - [ERROR] - [apis.py] - [get_books()] unconverted data remains: ?borrowing_time_range_end=2023-09-09T04:00:00.000Z
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 49, in fetch_book_data
+    book_filters.borrowing_time_range_start = (datetime.strptime(
+                                               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 352, in _strptime
+    raise ValueError("unconverted data remains: %s" %
+ValueError: unconverted data remains: ?borrowing_time_range_end=2023-09-09T04:00:00.000Z
+[2023-09-09 11:24:59,065] - [ERROR] - [apis.py] - [get_books()] unconverted data remains: ?borrowing_time_range_end=2023-09-09T04:00:00.000Z
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 49, in fetch_book_data
+    book_filters.borrowing_time_range_start = (datetime.strptime(
+                                               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 352, in _strptime
+    raise ValueError("unconverted data remains: %s" %
+ValueError: unconverted data remains: ?borrowing_time_range_end=2023-09-09T04:00:00.000Z
+[2023-09-09 11:25:29,474] - [ERROR] - [apis.py] - [get_books()] unconverted data remains: ?borrowing_time_range_end=2023-09-09T04:00:00.000Z
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 50, in fetch_book_data
+    book_filters.borrowing_time_range_start = (datetime.strptime(
+                                               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 352, in _strptime
+    raise ValueError("unconverted data remains: %s" %
+ValueError: unconverted data remains: ?borrowing_time_range_end=2023-09-09T04:00:00.000Z
+[2023-09-09 12:00:42,181] - [ERROR] - [apis.py] - [get_books()] time data 'null' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
+Traceback (most recent call last):
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\PycharmProjects\library-management-system-backend-dev\src\services\crud\read.py", line 49, in fetch_book_data
+    book_filters.borrowing_time_range_start = (datetime.strptime(
+                                               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 349, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data 'null' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
