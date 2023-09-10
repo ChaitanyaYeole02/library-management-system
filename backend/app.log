@@ -1481,3 +1481,73 @@ Traceback (most recent call last):
   File "F:\Personal\Projects\library-management-system\backend\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 307, in _open_connection
     raise get_mysql_exception(
 mysql.connector.errors.DatabaseError: 2005 (HY000): Unknown MySQL server host 'mysql' (11001)
+[2023-09-10 14:36:58,256] - [ERROR] - [apis.py] - [get_books()] time data 'null' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
+Traceback (most recent call last):
+  File "F:\Personal\Projects\library-management-system\backend\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\services\crud\read.py", line 49, in fetch_book_data
+    book_filters.borrowing_time_range_start = (datetime.strptime(
+                                               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 349, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data 'null' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
+[2023-09-10 14:37:20,819] - [ERROR] - [apis.py] - [get_books()] time data 'null' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
+Traceback (most recent call last):
+  File "F:\Personal\Projects\library-management-system\backend\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\services\crud\read.py", line 49, in fetch_book_data
+    book_filters.borrowing_time_range_start = (datetime.strptime(
+                                               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 349, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data 'null' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
+[2023-09-10 14:38:50,365] - [ERROR] - [apis.py] - [get_books()] time data 'null' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
+Traceback (most recent call last):
+  File "F:\Personal\Projects\library-management-system\backend\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\services\crud\read.py", line 49, in fetch_book_data
+    book_filters.borrowing_time_range_start = (datetime.strptime(
+                                               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 349, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data 'null' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
+[2023-09-10 14:39:11,743] - [ERROR] - [apis.py] - [get_books()] time data 'null' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
+Traceback (most recent call last):
+  File "F:\Personal\Projects\library-management-system\backend\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\services\crud\read.py", line 49, in fetch_book_data
+    book_filters.borrowing_time_range_start = (datetime.strptime(
+                                               ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 349, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data 'null' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
+[2023-09-10 14:39:39,484] - [ERROR] - [apis.py] - [get_books()] time data 'null' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
+Traceback (most recent call last):
+  File "F:\Personal\Projects\library-management-system\backend\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\services\crud\read.py", line 54, in fetch_book_data
+    book_filters.borrowing_time_range_end = (datetime.strptime(
+                                             ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 349, in _strptime
+    raise ValueError("time data %r does not match format %r" %
+ValueError: time data 'null' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'

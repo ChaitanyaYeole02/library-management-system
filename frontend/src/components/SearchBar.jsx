@@ -19,8 +19,8 @@ const SearchBar = ({ onSearch }) => {
 
   const handleSearch = () => {
     if (
-      selectedFilter === "publicationDate" ||
-      selectedFilter === "availabilityDate"
+      (selectedFilter === "publicationDate" ||
+      selectedFilter === "availabilityDate") && searchTerm
     ) {
       const formattedSearchTerm = searchTerm.toISOString();
       onSearch(formattedSearchTerm, selectedFilter);
@@ -29,8 +29,8 @@ const SearchBar = ({ onSearch }) => {
         {
           startDate: borrowingStartDate
             ? borrowingStartDate.toISOString()
-            : null,
-          endDate: borrowingEndDate ? borrowingEndDate.toISOString() : null,
+            : "",
+          endDate: borrowingEndDate ? borrowingEndDate.toISOString() : "",
         },
         selectedFilter
       );
