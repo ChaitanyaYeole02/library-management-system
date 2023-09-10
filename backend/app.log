@@ -1415,3 +1415,69 @@ Traceback (most recent call last):
     port=port_val,
          ^^^^^^^^
 NameError: name 'port_val' is not defined
+[2023-09-10 14:20:49,906] - [ERROR] - [apis.py] - [get_books()] 2005 (HY000): Unknown MySQL server host 'mysql' (11001)
+Traceback (most recent call last):
+  File "F:\Personal\Projects\library-management-system\backend\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 302, in _open_connection
+    self._cmysql.connect(**cnx_kwargs)
+_mysql_connector.MySQLInterfaceError: Unknown MySQL server host 'mysql' (11001)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Personal\Projects\library-management-system\backend\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\services\crud\read.py", line 63, in fetch_book_data
+    return mysql_db.fetch_all_dictionary(query, tuple(params))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\config\mysql_config.py", line 38, in fetch_all_dictionary
+    with get_mysql_connection() as connection:
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\config\mysql_config.py", line 13, in get_mysql_connection
+    connection = conn.connect(
+                 ^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\venv\Lib\site-packages\mysql\connector\pooling.py", line 293, in connect
+    return CMySQLConnection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 128, in __init__
+    self.connect(**kwargs)
+  File "F:\Personal\Projects\library-management-system\backend\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1217, in connect
+    self._open_connection()
+  File "F:\Personal\Projects\library-management-system\backend\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 307, in _open_connection
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 2005 (HY000): Unknown MySQL server host 'mysql' (11001)
+[2023-09-10 14:20:52,673] - [ERROR] - [apis.py] - [get_books()] 2005 (HY000): Unknown MySQL server host 'mysql' (11001)
+Traceback (most recent call last):
+  File "F:\Personal\Projects\library-management-system\backend\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 302, in _open_connection
+    self._cmysql.connect(**cnx_kwargs)
+_mysql_connector.MySQLInterfaceError: Unknown MySQL server host 'mysql' (11001)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Personal\Projects\library-management-system\backend\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\services\crud\read.py", line 63, in fetch_book_data
+    return mysql_db.fetch_all_dictionary(query, tuple(params))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\config\mysql_config.py", line 38, in fetch_all_dictionary
+    with get_mysql_connection() as connection:
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\config\mysql_config.py", line 13, in get_mysql_connection
+    connection = conn.connect(
+                 ^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\venv\Lib\site-packages\mysql\connector\pooling.py", line 293, in connect
+    return CMySQLConnection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 128, in __init__
+    self.connect(**kwargs)
+  File "F:\Personal\Projects\library-management-system\backend\venv\Lib\site-packages\mysql\connector\abstracts.py", line 1217, in connect
+    self._open_connection()
+  File "F:\Personal\Projects\library-management-system\backend\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 307, in _open_connection
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 2005 (HY000): Unknown MySQL server host 'mysql' (11001)

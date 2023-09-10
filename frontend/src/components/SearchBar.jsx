@@ -4,13 +4,18 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [onLoad, setOnLoad] = useState(true);
   const [selectedFilter, setSelectedFilter] = useState("title");
   const [borrowingStartDate, setBorrowingStartDate] = useState(null);
   const [borrowingEndDate, setBorrowingEndDate] = useState(null);
 
   useEffect(() => {
-    setSearchTerm("");
-  }, [selectedFilter]);
+    if (onLoad) {
+      setSearchTerm("");
+      setOnLoad(false);
+    }
+    handleSearch();
+  }, [selectedFilter, searchTerm]);
 
   const handleSearch = () => {
     if (
@@ -32,10 +37,6 @@ const SearchBar = ({ onSearch }) => {
     } else {
       onSearch(searchTerm, selectedFilter);
     }
-  };
-
-  const handleKeyPress = () => {
-      handleSearch();
   };
 
   const renderFilterInput = () => {
@@ -84,8 +85,9 @@ const SearchBar = ({ onSearch }) => {
           type="text"
           placeholder={`Search by ${selectedFilter}`}
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyDown={handleKeyPress}
+          onChange={(e) => {
+            setSearchTerm(e.target.value);
+          }}
         />
       );
     }
