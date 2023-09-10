@@ -12,11 +12,11 @@
 <img src="https://img.shields.io/badge/HTML5-E34F26.svg?style&logo=HTML5&logoColor=white" alt="HTML5" />
 <img src="https://img.shields.io/badge/CSS-1572B6?style=flat&logo=css3" alt="CSS Badge" />
 <img src="https://img.shields.io/badge/MySQL-00758F?style=flat&logo=mysql&logoColor=white" alt="MySQL" />
-
+<br>
 <img src="https://img.shields.io/badge/FastAPI-009688.svg?style&logo=FastAPI&logoColor=white" alt="FastAPI" />
 <img src="https://img.shields.io/badge/Vite-646CFF.svg?style&logo=Vite&logoColor=white" alt="Vite" />
 <img src="https://img.shields.io/badge/Axios-5A29E4.svg?style&logo=Axios&logoColor=white" alt="Axios" />
-
+<br>
 <img src="https://img.shields.io/badge/Docker-2496ED.svg?style&logo=Docker&logoColor=white" alt="Docker" />
 </p>
 <img src="https://img.shields.io/github/languages/code-size/chaitanya-yeole/library-management-system" alt="GitHub code size in bytes" />
