@@ -1372,3 +1372,46 @@ Traceback (most recent call last):
   File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\_strptime.py", line 349, in _strptime
     raise ValueError("time data %r does not match format %r" %
 ValueError: time data 'null' does not match format '%Y-%m-%dT%H:%M:%S.%fZ'
+[2023-09-09 23:22:17,856] - [ERROR] - [apis.py] - [get_books()] 1146 (42S02): Table 'library_management_dev.books' doesn't exist
+Traceback (most recent call last):
+  File "F:\Personal\Projects\library-management-system\backend\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 633, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Table 'library_management_dev.books' doesn't exist
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\Personal\Projects\library-management-system\backend\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\services\crud\read.py", line 63, in fetch_book_data
+    return mysql_db.fetch_all_dictionary(query, tuple(params))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\config\mysql_config.py", line 43, in fetch_all_dictionary
+    cursor.execute(query, params)
+  File "F:\Personal\Projects\library-management-system\backend\venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 330, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\venv\Lib\site-packages\mysql\connector\opentelemetry\context_propagation.py", line 77, in wrapper
+    return method(cnx, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\venv\Lib\site-packages\mysql\connector\connection_cext.py", line 641, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1146 (42S02): Table 'library_management_dev.books' doesn't exist
+[2023-09-09 23:23:12,754] - [ERROR] - [apis.py] - [get_books()] name 'port_val' is not defined
+Traceback (most recent call last):
+  File "F:\Personal\Projects\library-management-system\backend\src\services\api\apis.py", line 47, in get_books
+    book_data = calculate_availability(fetch_book_data(book_filters))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\services\crud\read.py", line 63, in fetch_book_data
+    return mysql_db.fetch_all_dictionary(query, tuple(params))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\config\mysql_config.py", line 39, in fetch_all_dictionary
+    with get_mysql_connection() as connection:
+  File "C:\Users\cyeol\AppData\Local\Programs\Python\Python311\Lib\contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "F:\Personal\Projects\library-management-system\backend\src\config\mysql_config.py", line 17, in get_mysql_connection
+    port=port_val,
+         ^^^^^^^^
+NameError: name 'port_val' is not defined
