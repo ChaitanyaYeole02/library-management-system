@@ -62,6 +62,11 @@ docker-compose build
 docker-compose up
 ```
 
+5. Run the Library Management application:
+```sh
+http://localhost:4173
+```
+
 ---
 
 ## 📄 License
